@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__time__get_current_time"
+    ]
+  }
+}
