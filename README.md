@@ -32,6 +32,14 @@
 
 **触发：** 用户要求更新 CLAUDE.md，或代码库架构/约定/命令发生变化时
 
+---
+
+### [`team-dev`](./team-dev/SKILL.md)
+
+复杂开发任务的组队执行模式：主对话（lead）只负责规划、协调与审查，具体实现全部委派给快模型 teammates（coder → sonnet，explorer → haiku）执行。
+
+**触发：** 用户输入 /team-dev 或明确要求“组队开发”“协作模式”时
+
 ## License
 
 MIT
