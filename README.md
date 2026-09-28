@@ -40,6 +40,16 @@
 
 **触发：** 用户输入 /team-dev 或明确要求“组队开发”“协作模式”时
 
+### [`engram`](./engram/SKILL.md)
+
+全局自进化记忆：`/engram setup` 将会话启动注入与会话结束巩固两个 hooks 登记进用户级 settings，此后全自动生效；`review` 审查整理记忆，`sync` 经 git 远程多机同步，`status` 查看状态。
+
+**触发：** 用户输入 /engram，或要求设置、整理、检查、同步记忆时
+
+> 由 [engram](https://github.com/eyeix/engram) 插件形态改造而来，hooks 脚本复制自基线提交 `0062298`；上游后续变更需手动同步到本仓库副本。
+
+---
+
 ## License
 
 MIT

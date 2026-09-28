@@ -12,8 +12,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```
 <skill-name>/
-  SKILL.md       # 唯一文件
+  SKILL.md       # 必需入口，简单 skill 仅此一文件
 ```
+
+需要子流程文档或脚本时，附加文件随 skill 目录一同分发（如 `engram/` 下的 `setup.md` 与 `hooks/`）。
 
 `SKILL.md` 必须包含 frontmatter：
 
