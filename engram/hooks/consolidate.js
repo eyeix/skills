@@ -38,7 +38,8 @@ const TEMPLATES = {
 };
 
 // 运行时状态不入库：去抖时间戳与巩固日志
-const GITIGNORE = '.last_run\nlogs/\n';
+// .consolidate-tmp/ 为巩固子进程可能遗留的中转目录，一并排除，避免被 git add -A 带入记忆仓库
+const GITIGNORE = ['.last_run', 'logs/', '.consolidate-tmp/'];
 
 // 即插即用：目录结构、记忆模板、git 仓库在首次巩固时自动初始化，无需手动步骤
 function ensureDataDir() {
@@ -48,9 +49,16 @@ function ensureDataDir() {
     const file = p.join(GM, name);
     if (!fs.existsSync(file)) fs.writeFileSync(file, TEMPLATES[name]);
   }
-  // .gitignore 在 git init 前落盘，确保首次 add -A 不带入运行时文件；存量目录升级插件后也会在此补上
+  // .gitignore 落在 git init 之前，确保首次 add -A 不带入运行时文件；
+  // 已存在时补齐缺失条目，存量目录随版本升级同样获得新的忽略规则
   const ignoreFile = p.join(GM, '.gitignore');
-  if (!fs.existsSync(ignoreFile)) fs.writeFileSync(ignoreFile, GITIGNORE);
+  const existing = fs.existsSync(ignoreFile) ? fs.readFileSync(ignoreFile, 'utf8') : '';
+  const lines = existing.split('\n').map(l => l.trim());
+  const missing = GITIGNORE.filter(e => !lines.includes(e));
+  if (missing.length) {
+    const prefix = existing && !existing.endsWith('\n') ? '\n' : '';
+    fs.appendFileSync(ignoreFile, prefix + missing.join('\n') + '\n');
+  }
   if (!fs.existsSync(p.join(GM, '.git'))) {
     // git 不可用或未配置身份时静默跳过，不影响核心巩固功能
     try {
@@ -86,10 +94,12 @@ process.stdin.on('end', () => {
   fs.writeFileSync(p.join(GM, '.last_run'), String(now));
 
   const prompt = `你是记忆巩固器。任务：
-1) 读取 ${transcript}（JSONL 会话记录，过大则只读尾部若干条）；
+1) 读取 ${transcript}（JSONL 会话记录）：文件过大时用 Read 的 offset/limit 只读尾部若干条，
+   无需落地任何中间文件；
 2) 读取 ${p.join(GM, 'MEMORY.md')} 与 ${p.join(GM, 'USER.md')}；
 3) 提炼跨项目长期有价值的：用户偏好、纠错教训、工作方式、环境事实；
-4) 约束：只允许修改这两个文件；写入前先查重合并，矛盾以最新为准；
+4) 约束：只允许写入上述 MEMORY.md、USER.md 与 archive 文件，不得创建其他任何文件，
+   尤其不得在当前工作目录留下中转脚本或数据文件；写入前先查重合并，矛盾以最新为准；
    MEMORY.md ≤ ${MEMORY_LIMIT} 字符、USER.md ≤ ${USER_LIMIT} 字符，超限时自主浓缩，
    淘汰条目追加到 ${p.join(GM, 'archive', localDate() + '.md')}；项目专属细节不写入；
    无值得记录的内容则不修改任何文件。
@@ -109,6 +119,9 @@ process.stdin.on('end', () => {
     {
       stdio: ['pipe', logFd, logFd],
       detached: true,
+      // 子进程 cwd 固定到系统临时目录：transcript 与记忆文件均传绝对路径，不依赖 cwd 定位；
+      // 子进程若仍自行落盘中转文件，也只会落在临时目录，不会污染宿主项目仓库
+      cwd: os.tmpdir(),
       // Windows 上 claude 为 .cmd shim，需 shell 才能解析；prompt 走 stdin 不受引号影响
       shell: process.platform === 'win32',
       env: { ...process.env, ENGRAM_CHILD: '1' },
