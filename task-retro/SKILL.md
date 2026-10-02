@@ -1,0 +1,47 @@
+---
+name: task-retro
+description: "Conduct a retrospective on a task or coding session: reconcile task doc TODOs and ticket statuses, archive finished work, decide what knowledge to write back into .agentdocs/, and suggest agent-environment improvements in severity order. Run when a task is done or a session wraps up."
+disable-model-invocation: true
+---
+
+# 任务复盘
+
+任务完成后的统一收口:状态收口、归档、知识写回、环境改进。改进的对象是 agent 环境,不是代码本身;代码质量问题交给代码审查流程。
+
+## 流程
+
+### 1. 状态收口
+
+- 对照实际完成情况,更新任务文档(`.agentdocs/workflow/<task>/task.md`)的任务拆解章节与各工单状态;
+- 工单验收标准逐条核对:全部满足才勾选,部分满足保留未勾并注明缺口;
+- 计划过而实际未做的工作,移入"范围外"或拆为新任务,不从记录中消失。
+
+### 2. 归档
+
+任务全部完成时,把整个任务目录(或单文件任务文档)移入 `.agentdocs/workflow/done/`,并从 index.md 的"当前任务文档"移除该条目。
+
+### 3. 知识写回
+
+调用 agent-docs skill,按其"写:知识沉淀"纪律判断与执行。核心判断:跨任务或跨文件适用的产出才写,即术语、决策、可复用模式、跨文件约束四类;仅影响局部实现、无长期价值的产出不写。
+
+### 4. 环境改进
+
+回顾本任务会话,按严重度排序呈现改进候选,供用户选择:
+
+| 类别 | 触发信号 |
+|------|---------|
+| 导航指针 | 找文件、找信息耗时长;存在隐性依赖 |
+| 自动检查 | 出现过 lint、类型、测试能拦截的错误;仓库无守门检查本身就是一条发现 |
+| 编码标准 | 审查者重复纠正同类问题。机械问题配确定性检查(自定义 lint 规则、pre-commit、CI),判断问题才配编码标准 |
+| 提示词瘦身 | AGENTS.md 或 CLAUDE.md 中存在不影响行为的段落,按句核对后删除 |
+| 工具经济 | 高成本工具调用可合并或省略 |
+| 信息可达 | 关键信息当时不可得:日志未接入、权限缺失 |
+
+两条定位原则:
+
+- 实现与审查的压力差异:实现 agent 的 context 压力最大(探索、写码、调试),审查 agent 最小(只看 diff)。编码标准约束审查者,不追加给实现者;
+- AGENTS.md 与 CLAUDE.md 只放导航指针,正文放按需读取的文档或 skills。
+
+### 5. 输出
+
+汇报四项:状态收口结果、归档动作、写回清单、环境改进建议(按严重度)。

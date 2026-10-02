@@ -6,3 +6,7 @@
 - **脚本**：新增或改动的 JS（如 `engram/hooks/*.js`）一律 `node --check` 通过；纯 node 实现（路径用 `path.join` 拼接），不引入 npm 依赖；
 - **链接**：README 中各 skill 条目链接指向实际存在的 `./<skill>/SKILL.md`；
 - **行为验证**：skill 行为以真实会话演练为准，新增 skill 至少演练主路径一次。
+
+## Agent docs
+
+- 工程文档、术语、决策与任务状态:`.agentdocs/`(入口 `index.md`,读写纪律见 `agent-docs` skill)

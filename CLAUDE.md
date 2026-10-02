@@ -32,3 +32,5 @@ description: <英文描述>      # 用于触发判断，必须是英文
 - **语言**：frontmatter `description` 用英文；正文内容用中文
 - **内容**：面向公共使用，不包含项目特定路径或章节名
 - **提交**：遵循 Conventional Commits 规范，提交信息使用中文
+
+@AGENTS.md

@@ -1,6 +1,6 @@
 ---
 name: team-dev
-description: Team-based execution mode for complex development tasks. Use when the user types /team-dev or explicitly asks for team development ("组队开发") or collaboration mode ("协作模式"). The main conversation handles only planning, coordination, and review; implementation is delegated to teammates with model tiers matched to each task's cognitive complexity.
+description: Team-based execution mode for complex development tasks. Use when the user types /team-dev or explicitly asks for team development ("组队开发") or collaboration mode ("协作模式"). The main conversation handles only planning, coordination, and review; implementation is delegated to teammates with model tiers matched to each task's cognitive complexity. When tracer-bullet tickets exist under .agentdocs/workflow/, they replace on-the-fly task breakdown.
 ---
 
 # 组队开发协议
@@ -26,7 +26,16 @@ description: Team-based execution mode for complex development tasks. Use when t
 
 ## 执行流程
 
-### 1. 规划（lead）
+### 0. 工单驱动模式（存在工单时）
+
+`.agentdocs/workflow/<task>/tickets/` 下存在工单时，规划由工单承载，第 1 节的拆解步骤让位于工单：
+
+- lead 读取全部工单与阻塞边，直接构建任务 DAG：无阻塞边且未完成的工单构成就绪前沿，可并行派发
+- 工单的验收标准即子任务验收标准；委派消息引用工单路径，由 teammate 自行读取，不复制内容
+- 工单状态由 lead 维护：派发时改为 in-progress，验收通过后改为 done 并勾选验收标准
+- 发现工单拆分缺陷（粒度、遗漏依赖）时，先修订工单再继续：工单是唯一任务源，会话内的口头补充不构成任务
+
+### 1. 现场规划（lead，无工单时）
 
 - 澄清需求、确定方案；涉及多模块时按项目规范创建任务文档
 - 拆解为可独立验收的子任务并按上表定级，写明：目标文件、修改要点、验收标准
@@ -73,7 +82,7 @@ lead 是路由器，不是复读机：teammate 间的上下文通过文件传递
 - 审查返回摘要与关键 diff；分析结论需要深入时读落盘产物，不让 teammate 重述
 - 发现问题让原 teammate 修复
 - 架构层面歧义 → 与用户讨论；分析层面不确定 → 追问 analyst；实现细节 → 让 coder 自行决策并在返回中说明
-- 全部通过后向用户汇报，更新任务文档 TODO 状态
+- 全部通过后向用户汇报；工单驱动模式下更新工单状态，否则更新任务文档 TODO 状态
 
 ## 约束
 
