@@ -1,5 +1,7 @@
 # 纪律层订阅原版、编排层自建,唯二的关联点轻量化解
 
+> **已被 [ADR-0004](0004-full-ownership-migration.md) 取代**(2026-10-04):为可持续性,纪律层已全量重构迁移为本仓库自有版,不再订阅插件。本文的耦合审计结论仍然有效,是迁移可行性的依据。
+
 工程 skills 采取混合采纳:编码纪律层(tdd、code-review、grilling、research、prototype、diagnosing-bugs、codebase-design、pr、wizard、writing-for-agents、improve 等)订阅 mattpocock-skills 官方插件原版,不自建中文版;编排层(setup、任务文档、拆票、执行、复盘)全部自建于本仓库。停用 mattpocock 的 domain-modeling,文档纪律统一走自建的 agent-docs。
 
 ## 背景

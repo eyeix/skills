@@ -14,7 +14,8 @@
 
 ## 当前任务文档
 
-- `workflow/261002-agentdocs-refactor/task.md` - 将 agent docs 工程组织方式重构为零提示词依赖的可分发 skills 体系(工单见同目录 `tickets/`)
+- `workflow/261002-agentdocs-refactor/task.md` - 将 agent docs 工程组织方式重构为零提示词依赖的可分发 skills 体系(工单 03 的全局 CLAUDE.md 瘦身项经用户要求延后)
+- `workflow/261004-migrate-matt-skills/task.md` - mattpocock skills 全量重构迁移自有化(19 个,含两处合并与两处重构新造)
 
 ## 术语表
 

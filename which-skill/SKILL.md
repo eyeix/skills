@@ -1,0 +1,71 @@
+---
+name: which-skill
+description: "Ask which skill or flow fits your situation. A router over the skills in this repo: the task lifecycle chain, the auto-triggered disciplines, and standalone tools."
+disable-model-invocation: true
+---
+
+# 用哪个 skill
+
+你不需要记住每个 skill,问就行。
+
+## 主流程:想法 → 交付
+
+多数工作沿这条路走:
+
+1. **`/agentdocs-setup`** 每仓库一次:初始化 `.agentdocs/` 工作区;
+2. **`/interview`** 对齐想法:按设计树无情访谈,术语与决策当场沉淀。开始任何有分量的变更前先到这里;
+3. 分支:**这个任务一个会话装得下吗?**
+   - 装不下 → **`/wayfinder`**(见"超大会话工程");
+   - 装得下 → **`/task-spec`** 把当前对话定稿为任务规格;
+4. 需要拆分执行 → **`/task-tickets`** 拆为带阻塞边的工单;
+5. 执行,二选一:**`/run-ticket`** 逐张轻量执行(每张新会话,或在本会话直接做小任务);**`/team-dev`** 组队并行(lead 规划协调,teammates 执行);
+6. **`/task-retro`** 收口:状态核对、归档、知识写回、环境改进。
+
+执行内部由纪律层驱动(见下):构建走 **tdd**(红绿循环,一片一循环),收尾走 **code-review**(两轴审查,Spec 轴以工单为源)。单独想测试先行或审查某个分支时,直接点名它们。
+
+## 超大会话工程
+
+**`/wayfinder`**:想法大到一次会话想不清楚(全系统重构、新产品线)。它建决策地图与决策工单,逐张解决,雾区渐进毕业,决策进 `adr/`。地图清空后回到主流程的 `/task-spec`,不直接执行。
+
+## 会话边界
+
+**`/handoff`**:把当前会话压缩为交接文档(落任务目录),给新会话、新目录或同事。阶段边界上的其他选项:继续、`/clear`、子代理、`/compact`——能继续就继续,清空是最后选项。
+
+## 自动触发的纪律层
+
+不敲命令,模型按场景自己到达。想显式点名时:
+
+- **agent-docs**:`.agentdocs/` 项目的文档读写纪律,贯穿所有环节;
+- **tdd**:说"测试先行"、"红绿重构";
+- **code-review**:说"审查这个分支/PR/变更";
+- **research**:说"调研一下 X"(后台按一手来源查证并落盘);
+- **prototype**:说"做个原型验证这个状态模型/UI";
+- **diagnose**:报 bug、说"诊断这个";
+- **pr**:写 PR 描述时;
+- **codebase-design**:讨论模块接口、接缝放哪;
+- **wait-what**:上一条没看懂,一键重讲。
+
+## 代码库健康
+
+- **`/improve-arch`**:定期(几天一次)扫描代码库找**深化机会**(浅模块变深模块),出 HTML 报告,选定一个进入 `/interview` 细化;
+- **codebase-design**(自动触发)是它底下的设计词汇:深模块、接缝、杠杆、局部性。
+
+## 方法与工具
+
+- **writing-for-agents**(自动触发):写 skill、AGENTS.md、任何 agent 文档时的方法论,维护本仓库必读;
+- **`/guardrails`**:给项目装守门(pre-commit 检查、危险 git 命令拦截);
+- **`/wizard`**:生成向导脚本,带人做只有人能做的操作(配 secrets、走第三方控制台);
+- **`/questionnaire`**:卡住你的答案在别人手里时,生成给对方填的问卷;
+- **`/teach`**:用当前目录做教学工作区,多会话学一个主题。
+
+## 独立工具
+
+- **`/commit-msg`**:生成 Conventional Commits 提交信息;
+- **`/sync-readme`** 与 **`/sync-claude-md`**:文档与实际状态对账;
+- **`/engram`**:跨项目全局记忆的设置、整理与同步。
+
+## 上下文卫生
+
+- 对齐 → task-spec → task-tickets 保持**同一个不间断的上下文窗口**(设计一次成型);
+- 每张工单的执行从**全新上下文**起步,teammate 之间只传工单路径等上下文指针,不复制内容——状态的家在文件系统,不在会话;
+- 会话逼近注意力上限时,在最近的阶段边界 `/compact`,不要带着降级的推理硬推。

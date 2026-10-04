@@ -1,6 +1,6 @@
 # skills
 
-个人常用的 Skills 合集，用于跨设备共享。
+个人常用 Skills 合集,零系统提示词依赖:全新环境安装本仓库即获得完整的工程组织能力(文档纪律、任务工作流、编码纪律、知识沉淀、复盘闭环)。
 
 ## 安装
 
@@ -8,105 +8,72 @@
 /install-github eyeix/skills
 ```
 
-## 工程组织体系
+## 工程体系总览
 
-不依赖任何系统提示词：全新环境安装本仓库 skills 后即获得完整的工程组织能力(文档纪律、任务工作流、知识沉淀、复盘闭环)。项目首次使用先运行 `/agentdocs-setup` 初始化 `.agentdocs/` 工作区。
+### 主流程:想法 → 交付
 
 ```
-想法 ──► /task-spec ──► /task-tickets ──► /team-dev ──► /task-retro
-         合成任务文档      拆解为工单       组队执行       收口复盘
-                    (agent-docs 纪律贯穿全程)
+/agentdocs-setup ─► /interview ─► /task-spec ─► /task-tickets ─► /run-ticket 或 /team-dev ─► /task-retro
+   初始化(一次)      对齐+沉淀术语    定稿任务规格     拆分执行工单      执行(轻/重双入口)        收口复盘
 ```
 
-- `/task-spec` 把当前对话合成为任务文档，`/task-tickets` 拆解为带阻塞边的工单文件(每张一个文件，状态持久在文件系统而非会话)；
-- `agent-docs` 由模型自动触发：编码任务开始前读索引与相关文档，知识产生时当场写回术语表、决策记录或领域文档；
-- `/team-dev` 组队执行：存在工单时直接消费工单构建任务 DAG；
-- `/task-retro` 收口：TODO 与工单状态核对、归档、知识写回、agent 环境改进建议；
-- 编码纪律(TDD、代码审查、需求访谈、领域建模)推荐组合 [mattpocock/skills](https://github.com/mattpocock/skills)(`claude plugins install mattpocock-skills`)，与本体系正交。
+- 对齐 → 定稿 → 拆票保持在**同一上下文窗口**;每张工单的执行从**全新上下文**起步——状态的家在 `.agentdocs/` 文件系统,不在会话;
+- 执行由纪律层驱动:构建走 **tdd**(红绿循环),收尾走 **code-review**(两轴审查,Spec 轴以工单为源);
+- 路线不确定时先问 **`/which-skill`**,它是全部 skills 的路由器。
+
+### 组合关系
+
+- 编排层(user-invoked)只被你键入触发,彼此不互调,只组合纪律层;
+- 纪律层(model-invoked)平时不用敲,模型按场景自动到达;
+- 任务状态即文件形态:`workflow/YYMMDD-slug.md`(已定稿)→ `workflow/YYMMDD-slug/`(执行中,tickets/ 状态即进度)→ `done/`(已完结)。
+
+### 谱系说明
+
+任务编排与文档体系为本仓库原创;编码纪律层(tdd、code-review、research、prototype、diagnose、pr、codebase-design、writing-for-agents 等)重构自 [mattpocock/skills](https://github.com/mattpocock/skills),保留其纪律骨架,适配 `.agentdocs/` 布局与组合方式。
 
 ## Skills
 
-### [`agentdocs-setup`](./agentdocs-setup/SKILL.md)
+### 任务生命周期(编排层,键入触发)
 
-初始化项目的 `.agentdocs/` 工作区:领域文档分类、术语与决策记录布局、任务工作流约定,并写入 CLAUDE.md 指针块。
+- [`agentdocs-setup`](./agentdocs-setup/SKILL.md) — 初始化项目 `.agentdocs/` 工作区与 AGENTS.md 指针块,每仓库一次
+- [`interview`](./interview/SKILL.md) — 无情访谈对齐想法,术语与决策当场沉淀;也会被模型按 "拷问/grill" 触发词自动到达
+- [`task-spec`](./task-spec/SKILL.md) — 把当前对话定稿为任务规格,不做二次访谈
+- [`task-tickets`](./task-tickets/SKILL.md) — 把任务规格拆为带阻塞边的贯通切片工单
+- [`run-ticket`](./run-ticket/SKILL.md) — 轻量执行单张工单:测试先行 → 两轴审查 → 提交 → 更新状态
+- [`team-dev`](./team-dev/SKILL.md) — 组队执行:lead 只做规划协调审查,实现委派给按认知密度分档的 teammates;存在工单时直接消费
+- [`task-retro`](./task-retro/SKILL.md) — 收口:状态核对、归档、知识写回、agent 环境改进建议
+- [`wayfinder`](./wayfinder/SKILL.md) — 超出单会话的大工程:决策地图 + 四型决策工单,雾区渐进毕业,路线清晰后移交主流程
+- [`handoff`](./handoff/SKILL.md) — 会话压缩为交接文档,落 `.agentdocs/` 持久化,含下一会话建议 skills
+- [`which-skill`](./which-skill/SKILL.md) — 路由器:这个场景用哪个 skill
 
-**触发：** 用户输入 /agentdocs-setup(每仓库一次)
+### 编码纪律层(模型自动触发,也可键入)
 
----
+- [`agent-docs`](./agent-docs/SKILL.md) — 文档读写纪律:任务前读索引与相关文档,知识产生时当场写回术语表、决策记录或领域文档
+- [`tdd`](./tdd/SKILL.md) — 红绿循环:预定接缝测试、反模式清单、一次一片 tracer bullet
+- [`code-review`](./code-review/SKILL.md) — 两轴并行子代理审查:Standards(编码标准+Fowler 气味基线)vs Spec(以任务文档/工单为源)
+- [`research`](./research/SKILL.md) — 后台代理按一手来源调研,发现带引用落盘
+- [`prototype`](./prototype/SKILL.md) — 一次性原型回答设计问题:逻辑出单 HTML 文件,UI 出多变体对比
+- [`diagnose`](./diagnose/SKILL.md) — 硬 bug 诊断纪律:先建紧凑可变红的反馈回路,再最小化、假设、插桩、修复、回归
+- [`pr`](./pr/SKILL.md) — PR 描述形状:最小可视化 Summary、前后证据、单向/双向门与爆炸半径
+- [`codebase-design`](./codebase-design/SKILL.md) — 深模块设计词汇:module/interface/depth/seam/adapter/leverage/locality
 
-### [`agent-docs`](./agent-docs/SKILL.md)
+### 方法与工具
 
-工程文档纪律:任务开始前读什么、知识产生时写哪里、索引与懒创建规则如何维护,含术语表与决策记录格式。
+- [`writing-for-agents`](./writing-for-agents/SKILL.md) — 写 agent 消费文档的元方法论:上下文指针、两种负载、信息层级、领词、修剪(维护本仓库必读)
+- [`guardrails`](./guardrails/SKILL.md) — 给项目装守门:pre-commit 检查(husky+lint-staged+prettier)与危险 git 命令拦截
+- [`wizard`](./wizard/SKILL.md) — 生成交互式 bash 向导,带人做只有人能做的操作
+- [`questionnaire`](./questionnaire/SKILL.md) — 答案在别人手里时,生成给对方填的决策问卷
+- [`teach`](./teach/SKILL.md) — 当前目录作教学工作区,多会话学一个主题
+- [`wait-what`](./wait-what/SKILL.md) — 上一条没听懂,一键用术语表词汇重讲
 
-**触发：** `.agentdocs/` 项目中的编码任务、文档读写、知识沉淀判断(模型自动)
+### 独立工具
 
----
+- [`commit-msg`](./commit-msg/SKILL.md) — 生成 Conventional Commits 提交信息
+- [`sync-readme`](./sync-readme/SKILL.md) — README 与实际状态系统性对账
+- [`sync-claude-md`](./sync-claude-md/SKILL.md) — CLAUDE.md 与实际状态系统性对账
+- [`engram`](./engram/SKILL.md) — 跨项目全局记忆:`setup` 登记 hooks、`review` 整理、`sync` 多机同步、`status` 查看状态
 
-### [`task-spec`](./task-spec/SKILL.md)
-
-把当前对话与代码库理解合成为任务文档(背景、方案、决策、阶段拆解),不做二次访谈。
-
-**触发：** 用户输入 /task-spec
-
----
-
-### [`task-tickets`](./task-tickets/SKILL.md)
-
-把任务文档拆解为工单:贯通切片、阻塞边、验收标准,每张工单一个文件。
-
-**触发：** 用户输入 /task-tickets
-
----
-
-### [`task-retro`](./task-retro/SKILL.md)
-
-任务复盘:状态收口与归档、知识写回判断、agent 环境改进建议(按严重度)。
-
-**触发：** 用户输入 /task-retro
-
----
-
-### [`team-dev`](./team-dev/SKILL.md)
-
-复杂开发任务的组队执行模式：主对话(lead)只负责规划、协调与审查，具体实现全部委派给快模型 teammates(coder → sonnet，explorer → haiku)执行;存在工单时直接消费工单构建任务 DAG。
-
-**触发：** 用户输入 /team-dev 或明确要求“组队开发”“协作模式”时
-
----
-
-### [`commit-msg`](./commit-msg/SKILL.md)
-
-分析暂存变更，生成符合 [Conventional Commits](https://www.conventionalcommits.org/) 规范的提交信息。
-
-**触发：** 用户要求生成 / 编写 commit message 时
-
----
-
-### [`sync-readme`](./sync-readme/SKILL.md)
-
-将代码库实际状态与 README.md 系统性对比，以外科手术式更新（而非重写）保持文档准确。
-
-**触发：** 用户要求更新 README，或对话中出现了文档未记录的用户可见变更时
-
----
-
-### [`sync-claude-md`](./sync-claude-md/SKILL.md)
-
-将代码库实际状态与 CLAUDE.md 系统性对比，识别过时或缺失内容并精准 patch。
-
-**触发：** 用户要求更新 CLAUDE.md，或代码库架构/约定/命令发生变化时
-
----
-
-### [`engram`](./engram/SKILL.md)
-
-全局自进化记忆：`/engram setup` 将会话启动注入与会话结束巩固两个 hooks 登记进用户级 settings，此后全自动生效；`review` 审查整理记忆，`sync` 经 git 远程多机同步，`status` 查看状态。跨项目记忆(用户偏好、机器差异)与项目内 `.agentdocs/` 互补。
-
-**触发：** 用户输入 /engram，或要求设置、整理、检查、同步记忆时
-
-> 由 [engram](https://github.com/eyeix/engram) 插件形态改造而来，hooks 脚本复制自基线提交 `0062298`；上游后续变更需手动同步到本仓库副本。
-
----
+> engram 由[同名插件](https://github.com/eyeix/engram)改造而来,hooks 脚本复制自基线提交 `0062298`,上游变更需手动同步。
 
 ## License
 
