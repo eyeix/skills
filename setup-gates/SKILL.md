@@ -1,12 +1,12 @@
 ---
-name: guardrails
-description: "Install guardrails for a repo: pre-commit checks (Husky + lint-staged + Prettier + typecheck + tests) and Claude Code hooks that block dangerous git commands (push, reset --hard, clean, branch -D). Use when the user wants commit-time checks, git safety hooks, or to prevent destructive git operations."
+name: setup-gates
+description: "Install quality gates for a repo: pre-commit checks (Husky + lint-staged + Prettier + typecheck + tests) and Claude Code hooks that block dangerous git commands (push, reset --hard, clean, branch -D). Use when the user wants commit-time checks, git safety hooks, or to prevent destructive git operations."
 disable-model-invocation: true
 ---
 
-# 项目守门
+# 安装门禁
 
-给仓库装两类守门,按用户需要各装各的:
+给仓库装两类门禁,按用户需要各装各的:
 
 1. **提交时检查**(pre-commit):lint、格式、类型、测试在提交时强制执行;
 2. **危险 git 拦截**(PreToolUse hook):agent 执行危险 git 命令前阻断。

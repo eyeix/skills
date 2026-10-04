@@ -53,7 +53,7 @@ disable-model-invocation: true
 ## 方法与工具
 
 - **writing-for-agents**(自动触发):写 skill、AGENTS.md、任何 agent 文档时的方法论,维护本仓库必读;
-- **`/guardrails`**:给项目装守门(pre-commit 检查、危险 git 命令拦截);
+- **`/setup-gates`**:给项目装门禁(pre-commit 检查、危险 git 命令拦截);
 - **`/wizard`**:生成向导脚本,带人做只有人能做的操作(配 secrets、走第三方控制台);
 - **`/questionnaire`**:卡住你的答案在别人手里时,生成给对方填的问卷;
 - **`/teach`**:用当前目录做教学工作区,多会话学一个主题。

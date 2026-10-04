@@ -8,7 +8,7 @@ ADR 0003 确立混合采纳(纪律层订阅、编排层自建)。订阅模式的
 
 ## 决策
 
-- 19 个 skills 重构迁移,含两处合并:grilling+grill-with-docs → `interview`(访谈+当场沉淀一体,无文档环境退化为纯访谈),setup-pre-commit+git-guardrails → `guardrails`(项目守门一体);
+- 19 个 skills 重构迁移,含两处合并:grilling+grill-with-docs → `interview`(访谈+当场沉淀一体,无文档环境退化为纯访谈),setup-pre-commit+git-guardrails → `guardrails`(项目守门一体,2026-10-04 更名 `setup-gates`);
 - 两处重构新造:`implement` → `run-ticket`(消费本体系工单文件),`ask-matt` → `which-skill`(路由本体系链路);
 - 布局引用统一改 `.agentdocs/`;code-review 的 Spec 轴来源改为任务文档与工单路径;
 - 不迁:grill-me、triage、migrate-to-shoehorn、scaffold-exercises。

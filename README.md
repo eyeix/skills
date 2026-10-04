@@ -60,7 +60,7 @@
 ### 方法与工具
 
 - [`writing-for-agents`](./writing-for-agents/SKILL.md) — 写 agent 消费文档的元方法论:上下文指针、两种负载、信息层级、领词、修剪(维护本仓库必读)
-- [`guardrails`](./guardrails/SKILL.md) — 给项目装守门:pre-commit 检查(husky+lint-staged+prettier)与危险 git 命令拦截
+- [`setup-gates`](./setup-gates/SKILL.md) — 给项目装门禁:pre-commit 检查(husky+lint-staged+prettier)与危险 git 命令拦截
 - [`wizard`](./wizard/SKILL.md) — 生成交互式 bash 向导,带人做只有人能做的操作
 - [`questionnaire`](./questionnaire/SKILL.md) — 答案在别人手里时,生成给对方填的决策问卷
 - [`teach`](./teach/SKILL.md) — 当前目录作教学工作区,多会话学一个主题
