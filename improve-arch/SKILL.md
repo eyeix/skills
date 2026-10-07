@@ -1,6 +1,6 @@
 ---
 name: improve-arch
-description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then interview through whichever one you pick.
+description: "扫描代码库找深化机会(浅模块变深模块),以可视化 HTML 报告呈现,再就选定的那个走访谈。"
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: task-retro
-description: "Conduct a retrospective on a task or coding session: reconcile task doc TODOs and ticket statuses, archive finished work, decide what knowledge to write back into .agentdocs/, and suggest agent-environment improvements in severity order. Run when a task is done or a session wraps up."
+description: "任务或会话收口复盘:核对任务文档 TODO 与工单状态、归档已完成的工作、判断哪些知识该写回 .agentdocs/,并按严重度给出 agent 环境改进建议。任务完成或会话收尾时运行。"
 disable-model-invocation: true
 ---
 

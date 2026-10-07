@@ -1,6 +1,6 @@
 ---
 name: setup-gates
-description: "Install quality gates for a repo: pre-commit checks (Husky + lint-staged + Prettier + typecheck + tests) and Claude Code hooks that block dangerous git commands (push, reset --hard, clean, branch -D). Use when the user wants commit-time checks, git safety hooks, or to prevent destructive git operations."
+description: "给仓库装质量门禁:提交时检查(Husky + lint-staged + Prettier + typecheck + 测试),以及拦截危险 git 命令的 Claude Code hook(push、reset --hard、clean、branch -D)。"
 disable-model-invocation: true
 ---
 

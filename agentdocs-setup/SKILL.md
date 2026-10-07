@@ -1,6 +1,6 @@
 ---
 name: agentdocs-setup
-description: "Initialize a repo's .agentdocs/ workspace: domain doc categories, glossary and ADR layout, and the task workflow conventions used by agent-docs, task-spec, task-tickets and task-retro. Run once per repo before first use."
+description: "初始化仓库的 .agentdocs/ 工作区:领域文档分类、术语表与 ADR 布局,以及 agent-docs、task-spec、task-tickets、task-retro 共用的任务工作流约定。每仓库首次使用前运行一次。"
 disable-model-invocation: true
 ---
 

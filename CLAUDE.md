@@ -22,14 +22,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```markdown
 ---
 name: <skill-name>          # 与目录名一致
-description: <英文描述>      # 用于触发判断，必须是英文
+description: <描述>          # 模型可调的用英文（触发判断），仅人可调的用中文
 ---
 ```
 
 ## 约定
 
 - **命名**：目录名与 `name` 字段保持一致，使用 kebab-case，动词用动词原形（`sync-*` 而非 `syncing-*`）
-- **语言**：frontmatter `description` 用英文；正文内容用中文
+- **语言**：正文内容用中文；仅人可调的 skill（`disable-model-invocation: true`）的 `description` 与 `argument-hint` 用中文，模型可调的保留英文 `description` 以保证自动触发的匹配质量
 - **内容**：面向公共使用，不包含项目特定路径或章节名
 - **提交**：遵循 Conventional Commits 规范，提交信息使用中文
 

@@ -1,6 +1,6 @@
 ---
 name: task-spec
-description: "Turn the current conversation into a task spec (background, solution, decisions, phased TODO) saved under .agentdocs/workflow/. No re-interview: it synthesizes what has already been discussed. Follow up with /task-tickets when the work needs splitting."
+description: "把当前对话定稿为任务规格(背景、方案、决策、分阶段 TODO),落 .agentdocs/workflow/。不做二次访谈,只综合已讨论过的内容。需要拆分执行时接 /task-tickets。"
 disable-model-invocation: true
 ---
 

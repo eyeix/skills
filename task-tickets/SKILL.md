@@ -1,6 +1,6 @@
 ---
 name: task-tickets
-description: "Break a task doc, plan, or the current conversation into tracer-bullet tickets under .agentdocs/workflow/, each ticket one file declaring its blocking edges and acceptance criteria. Follow up with /team-dev to execute."
+description: "把任务文档、计划或当前对话拆为 .agentdocs/workflow/ 下的贯通切片工单,每张一文件,声明阻塞它的其他工单与验收标准。后续用 /team-dev 执行。"
 disable-model-invocation: true
 ---
 

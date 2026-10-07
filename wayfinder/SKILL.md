@@ -1,6 +1,6 @@
 ---
 name: wayfinder
-description: "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets under .agentdocs/workflow/, resolving them one at a time until the way to the destination is clear."
+description: "为超出单个会话容量的大块工作绘制共享地图:在 .agentdocs/workflow/ 下建决策工单,逐张解决,直到通往目的地的路线清晰。"
 disable-model-invocation: true
 ---
 

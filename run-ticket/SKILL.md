@@ -1,6 +1,6 @@
 ---
 name: run-ticket
-description: "Implement a single ticket from .agentdocs/workflow/<task>/tickets/: build test-first, close out with code-review, commit, and update the ticket status. The lightweight counterpart to /team-dev."
+description: "执行 .agentdocs/workflow/<task>/tickets/ 下的单张工单:测试先行构建,收尾走 code-review,提交并更新工单状态。/team-dev 的轻量对应物。"
 disable-model-invocation: true
 ---
 

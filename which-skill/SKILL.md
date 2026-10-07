@@ -1,6 +1,6 @@
 ---
 name: which-skill
-description: "Ask which skill or flow fits your situation. A router over the skills in this repo: the task lifecycle chain, the auto-triggered disciplines, and standalone tools."
+description: "问这个场景该用哪个 skill。本仓库 skills 的路由器:任务生命周期主链、自动触发的纪律层、独立工具三类。"
 disable-model-invocation: true
 ---
 

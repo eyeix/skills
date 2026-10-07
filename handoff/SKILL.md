@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: "Compact the current conversation into a handoff doc for another agent to pick up, saved under .agentdocs/ so it persists."
+description: "把当前会话压缩为交接文档,落 .agentdocs/ 持久化,供新上下文的 agent 接手继续。"
 argument-hint: "What will the next session be used for?"
 disable-model-invocation: true
 ---

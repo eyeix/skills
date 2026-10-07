@@ -1,6 +1,6 @@
 ---
 name: questionnaire
-description: Turn a decision you can't fully answer into a questionnaire for someone else to fill in.
+description: "把你自己答不全的决策,变成一份交给别人填写的决策问卷。"
 disable-model-invocation: true
 ---
 
