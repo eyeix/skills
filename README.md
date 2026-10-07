@@ -13,10 +13,12 @@
 ### 主流程:想法 → 交付
 
 ```
-/agentdocs-setup ─► /interview ─► /task-spec ─► /task-tickets ─► /run-ticket 或 /team-dev ─► /task-retro
-   初始化(一次)      对齐+沉淀术语    定稿任务规格     拆分执行工单      执行(轻/重双入口)        收口复盘
+/agentdocs-setup ─► /interview ─┬─► /task-spec ─► /task-tickets ─► /run-ticket 或 /team-dev ─► /task-retro
+初始化(一次)        对齐+沉淀术语   定稿任务规格  拆分执行工单     执行(轻/重双入口)           收口复盘
+                                └─► /wayfinder:一个会话装不下时画决策地图,路清晰后回到 /task-spec
 ```
 
+- `/interview` 之后判断:这个任务**一个会话装得下吗**?装得下走主干 `/task-spec`;装不下(全系统重构、新产品线)先进 `/wayfinder` 画决策地图,路清晰后回到 `/task-spec`;
 - 对齐 → 定稿 → 拆票保持在**同一上下文窗口**;每张工单的执行从**全新上下文**起步——状态的家在 `.agentdocs/` 文件系统,不在会话;
 - 执行由纪律层驱动:构建走 **tdd**(红绿循环),收尾走 **code-review**(两轴审查,Spec 轴以工单为源);
 - 路线不确定时先问 **`/which-skill`**,它是全部 skills 的路由器。
@@ -42,7 +44,7 @@
 - [`run-ticket`](./run-ticket/SKILL.md) — 轻量执行单张工单:测试先行 → 两轴审查 → 提交 → 更新状态
 - [`team-dev`](./team-dev/SKILL.md) — 组队执行:lead 只做规划协调审查,实现委派给按认知密度分档的 teammates;存在工单时直接消费
 - [`task-retro`](./task-retro/SKILL.md) — 收口:状态核对、归档、知识写回、agent 环境改进建议
-- [`wayfinder`](./wayfinder/SKILL.md) — 超出单会话的大工程:决策地图 + 四型决策工单,雾区渐进毕业,路线清晰后移交主流程
+- [`wayfinder`](./wayfinder/SKILL.md) — 超出单会话的大工程:绘制决策地图,四型决策工单逐张解决,雾区渐进毕业,路清晰后移交 `/task-spec`
 - [`handoff`](./handoff/SKILL.md) — 会话压缩为交接文档,落 `.agentdocs/` 持久化,含下一会话建议 skills
 - [`which-skill`](./which-skill/SKILL.md) — 路由器:这个场景用哪个 skill
 
