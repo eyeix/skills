@@ -1,12 +1,12 @@
 ---
 name: run-ticket
-description: "执行 .agentdocs/workflow/<task>/tickets/ 下的单张工单:测试先行构建,收尾走 code-review,提交并更新工单状态。/team-dev 的轻量对应物。"
+description: "执行 .agentdocs/workflow/<task>/tickets/ 下的单张工单:测试先行构建,收尾走 code-review,提交并更新工单状态。/team-dev 的轻量对应物,多张工单就绪时移交组队模式。"
 disable-model-invocation: true
 ---
 
 # 执行工单
 
-单张工单、单会话的轻量执行入口;需要组队并行时用 `/team-dev`。
+单张工单、单会话的轻量执行入口;多张工单就绪时移交组队模式。
 
 前置:工单存在于 `.agentdocs/workflow/<task>/tickets/`。没有时告诉用户先运行 `/task-tickets`。
 
@@ -18,7 +18,7 @@ disable-model-invocation: true
 4. **检查节奏**:定期跑类型检查与单个测试文件,结束时跑完整测试套件;
 5. **收尾审查**:调 Skill 工具执行 `code-review`,固定点为开工前的分支状态,并告知规格为工单文件路径;
 6. **修复与提交**:修复审查发现后提交到当前分支(Conventional Commits);
-7. **收口工单**:勾选工单验收标准,状态改为 `done`。后续工单因此就绪(阻塞边清空)时提醒用户可继续。
+7. **收口工单**:勾选工单验收标准,状态改为 `done`。盘点剩余工单:就绪(阻塞边清空)的只有一张时提醒用户可继续;多张同时就绪时,告知用户并调 Skill 工具执行 `team-dev`,由组队模式并行派发。
 
 ## 边界
 

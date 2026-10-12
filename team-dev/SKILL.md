@@ -1,6 +1,6 @@
 ---
 name: team-dev
-description: Team-based execution mode for complex development tasks. Use when the user types /team-dev or explicitly asks for team development ("组队开发") or collaboration mode ("协作模式"). The main conversation handles only planning, coordination, and review; implementation is delegated to teammates with model tiers matched to each task's cognitive complexity. When tracer-bullet tickets exist under .agentdocs/workflow/, they replace on-the-fly task breakdown.
+description: Team-based execution mode for complex development tasks. Use when the user types /team-dev, explicitly asks for team development ("组队开发") or collaboration mode ("协作模式"), or when run-ticket hands off parallel execution of multiple ready tickets. The main conversation handles only planning, coordination, and review; implementation is delegated to teammates with model tiers matched to each task's cognitive complexity. When tracer-bullet tickets exist under .agentdocs/workflow/, they replace on-the-fly task breakdown.
 ---
 
 # 组队开发协议

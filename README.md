@@ -41,7 +41,7 @@
 - [`interview`](./interview/SKILL.md) — 无情访谈对齐想法,术语与决策当场沉淀;也会被模型按 "拷问/grill" 触发词自动到达
 - [`task-spec`](./task-spec/SKILL.md) — 把当前对话定稿为任务规格,不做二次访谈
 - [`task-tickets`](./task-tickets/SKILL.md) — 把任务规格拆为带阻塞边的贯通切片工单
-- [`run-ticket`](./run-ticket/SKILL.md) — 轻量执行单张工单:测试先行 → 两轴审查 → 提交 → 更新状态
+- [`run-ticket`](./run-ticket/SKILL.md) — 轻量执行单张工单:测试先行 → 两轴审查 → 提交 → 更新状态;多张工单就绪时移交 team-dev 组队并行
 - [`team-dev`](./team-dev/SKILL.md) — 组队执行:lead 只做规划协调审查,实现委派给按认知密度分档的 teammates;存在工单时直接消费
 - [`task-retro`](./task-retro/SKILL.md) — 收口:状态核对、归档、知识写回、agent 环境改进建议
 - [`wayfinder`](./wayfinder/SKILL.md) — 超出单会话的大工程:绘制决策地图,四型决策工单逐张解决,雾区渐进毕业,路清晰后移交 `/task-spec`
