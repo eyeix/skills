@@ -43,6 +43,7 @@ disable-model-invocation: true
 - **diagnose**:报 bug、说"诊断这个";
 - **pr**:写 PR 描述时;
 - **codebase-design**:讨论模块接口、接缝放哪;
+- **review-frontend-production**:说"体检/审查这个前端项目",输出有证据的问题、修复方案与验收条件;
 - **wait-what**:上一条没看懂,一键重讲。
 
 ## 代码库健康

@@ -58,6 +58,7 @@
 - [`diagnose`](./diagnose/SKILL.md) — 硬 bug 诊断纪律:先建紧凑可变红的反馈回路,再最小化、假设、插桩、修复、回归
 - [`pr`](./pr/SKILL.md) — PR 描述形状:最小可视化 Summary、前后证据、单向/双向门与爆炸半径
 - [`codebase-design`](./codebase-design/SKILL.md) — 深模块设计词汇:module/interface/depth/seam/adapter/leverage/locality
+- [`review-frontend-production`](./review-frontend-production/SKILL.md) — 前端审查助手:快速体检或逐页逐组件完整审查,输出有证据的问题、修复方案与验收条件;配套 Python 标准库台账脚本
 
 ### 方法与工具
 
