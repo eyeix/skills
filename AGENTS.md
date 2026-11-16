@@ -10,4 +10,4 @@
 
 ## Agent docs
 
-- 工程文档、术语、决策与任务状态:`.agentdocs/`(入口 `index.md`,读写纪律见 `agent-docs` skill)
+- 项目记忆(术语、决策、领域知识)与进行中任务的暂存区:`.agentdocs/`,开工先 `ls` 再按需读,读写纪律见 `agent-docs` skill

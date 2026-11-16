@@ -1,11 +1,13 @@
 ---
 name: interview
-description: "Relentless interview that sharpens a plan or design while settling terms and decisions into .agentdocs/ (glossary, ADRs) as they crystallize. Use when the user wants to stress-test their thinking, uses any 'grill' / '拷问' trigger phrases, or needs requirements aligned before a task."
+description: "Relentless interview that sharpens a plan or design until shared understanding, then settles it into a task spec in .agentdocs/workflow/. Use when the user wants to stress-test their thinking, uses any 'grill' / '拷问' trigger phrases, or needs requirements aligned and finalized before a task."
 ---
 
-# 访谈与沉淀
+# 访谈与定稿
 
-无情访谈用户,直到达成共享理解;过程中产生的术语与决策**当场沉淀**进 `.agentdocs/`。
+无情访谈用户,直到达成共享理解;然后把共识定稿为任务规格,写入暂存区。
+
+讨论中产生的术语与决策的沉淀由 `agent-docs` 纪律承载,本 skill 不自带写规则。
 
 ## 访谈:设计树与轮次
 
@@ -31,17 +33,19 @@ description: "Relentless interview that sharpens a plan or design while settling
 
 **查事实是你的工作,永远不是用户的**。前沿问题需要环境事实(文件系统、工具、代码)时,派子代理去查;不问用户任何你自己查得到的东西。不为它阻塞:运行中的探索是一条未定的前置,只有它下游的问题等它回报,前沿的其余照问。**决策是用户的**:逐条交给他们,等。
 
-## 沉淀:当场写,不攒批
-
-访谈中每确定一个**术语**或一个**决策**,当场调 Skill 工具执行 `agent-docs` 的"写:知识沉淀"纪律:
-
-- 术语精确化(一词多义被拆清)→ `.agentdocs/glossary.md`;
-- 满足三条门槛的决策(难逆转、无上下文会困惑、真实权衡)→ `.agentdocs/adr/`;
-- 后续轮次的提问使用已沉淀的术语,巩固共享语言。
-
 **主动挑战,不等人问**:用户用词与术语表冲突时当场指出;模糊词要求区分;领域概念间关系用边界场景压测;用户说法与代码矛盾时指出。
 
-## 退化与完成
+## 定稿:规格写入暂存区
 
-- 所在仓库没有 `.agentdocs/` 时,沉淀部分自动跳过,退化为纯访谈,不提示初始化;
-- 访谈完成的条件:**前沿为空**——设计树的每个分支都已走过,没有任何默默假设留下。在用户确认达成共享理解之前,不开始动手实现。
+前沿为空——设计树的每个分支都已走过,没有默默假设留下——且用户确认达成共享理解后:
+
+1. **探索代码库**(若本次会话尚未探索):遵循 `agent-docs` skill 的读纪律;
+2. **确定测试边界**:找出将要验证本功能的既有接缝(seam),优先复用既有接缝,新接缝放在尽可能高的位置,全库接缝越少越好。与用户确认接缝选择;
+3. **合成规格**:按 [task-doc-template.md](task-doc-template.md) 写入 `.agentdocs/workflow/YYMMDD-slug/task.md`。`YYMMDD` 为当日日期,`slug` 为短横线连接的英文任务简述。规格只综合已讨论过的内容,对话里没有的决策不发明,标注"待定"留给执行时处理;
+4. **执行提示**:告知用户需要并行执行时用 `/team-dev`(它会读取规格并拆分工单)。
+
+简单任务(单文件、单步、低风险)不需要规格:访谈结论明确后直接实现,不写入暂存区。
+
+## 退化
+
+所在仓库没有 `.agentdocs/` 时,访谈照常进行;到了定稿步骤,告诉用户先运行 `/agentdocs-setup`,不自行创建目录。
