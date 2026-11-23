@@ -40,7 +40,7 @@ disable-model-invocation: true
 ```markdown
 ## Agent docs
 
-- 项目记忆(术语、决策、领域知识)与进行中任务的暂存区:`.agentdocs/`,开工先 `ls` 再按需读,读写纪律见 `agent-docs` skill
+- 开工 `ls .agentdocs/`,按首行"何时读"选读;任务文档放 `workflow/`,结束删除;写入前调 Skill 工具执行 `agent-docs`
 ```
 
 然后创建 `.agentdocs/` 与已确认的领域文档(首行"何时读"),`glossary.md`、`adr/`、`workflow/` 均不预先创建,首次有内容可写时由 `agent-docs` skill 创建。

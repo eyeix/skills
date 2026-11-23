@@ -41,7 +41,7 @@ description: "Relentless interview that sharpens a plan or design until shared u
 
 1. **探索代码库**(若本次会话尚未探索):遵循 `agent-docs` skill 的读纪律;
 2. **确定测试边界**:找出将要验证本功能的既有接缝(seam),优先复用既有接缝,新接缝放在尽可能高的位置,全库接缝越少越好。与用户确认接缝选择;
-3. **合成规格**:按 [task-doc-template.md](task-doc-template.md) 写入 `.agentdocs/workflow/YYMMDD-slug/task.md`。`YYMMDD` 为当日日期,`slug` 为短横线连接的英文任务简述。规格只综合已讨论过的内容,对话里没有的决策不发明,标注"待定"留给执行时处理;
+3. **合成规格**:按 [task-doc-template.md](task-doc-template.md) 写入 `.agentdocs/workflow/YYMMDD-slug/task.md`。`YYMMDD` 为当日日期,`slug` 为短横线连接的英文任务简述。只写行为、位置与验证方式,对话里没有的决策填"待定";
 4. **执行提示**:告知用户需要并行执行时用 `/team-dev`(它会读取规格并拆分工单)。
 
 简单任务(单文件、单步、低风险)不需要规格:访谈结论明确后直接实现,不写入暂存区。
